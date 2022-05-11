@@ -1,0 +1,207 @@
+\documentclass{beamer} 
+\usepackage{amsmath,amsthm}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{soul}
+
+\usetheme{WVU}
+\usecolortheme{WVU}
+\usepackage{multirow}
+
+\mode<presentation> 
+
+\title[VE401 SU2022 RC intro]{VE401 SU2022 RC: introduction}
+
+\author[ Shuyu Wu ]{ Shuyu Wu }
+\institute[UM-SJTU JI]{UM-SJTU Joint Institute \vspace{.2cm} \\ \includegraphics[scale=0.3]{umji_logo.png}\\wushuyu2002@sjtu.edu.cn}
+\date[May 2022]{\today}
+
+\begin{document}
+\begin{frame} 
+
+\titlepage 
+
+\end{frame} 
+
+\begin{frame}
+       \frametitle{Outline}
+       \tableofcontents
+\end{frame}
+
+\section{Introduction} 
+\begin{frame} 
+\frametitle{Introduction to ...} 
+
+\begin{itemize}
+\item Instructor
+\item<2-> Me
+\item<3-> Course Content
+\end{itemize} 
+\end{frame} 
+
+\begin{frame}
+    \frametitle{Instructor}
+    Horst Hohberger
+    \begin{itemize}
+        \item Teaching Professor at JI(2021-)
+        \item Join JI since 2007
+        \item Personal Website: https://umji.sjtu.edu.cn/\textasciitilde horst/index.html
+            \begin{itemize}
+                \item The course slide and sample assignments are available here(but isn't the assignment this year)
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Self Introduction}
+    Shuyu Wu
+    \begin{itemize}
+        \item work experience at JI
+            \begin{itemize}
+                \item TA in VG101 FA21(2021.9-2021.12)
+                \item Honor Council Member(2021.11-)
+            \end{itemize}
+        \item the programming language I like for this course
+            \begin{itemize}
+                \item Matlab
+                \item Python(with scipy)
+                \item \st{Mathematica}(but it's the official language for this course)
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{About this course, VE401}
+    Three main parts
+    \begin{itemize}
+        \item probability theory
+        \item introduction to statistics
+        \item analysis of linear regression and analysis of variance
+    \end{itemize}
+    We don't teach
+    \begin{itemize}
+        \item random process
+        \item Bayesian analysis in statistical inference
+    \end{itemize}
+    But there may be extra topics in my RC related to these topics
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{About this course, VE401}
+    
+    \begin{itemize}
+        \item What's ``probability" and ``statistics" based on the probability and statistics knowledge you have learnt in your life?
+        \item Is there a mathematical definition for ``probability"?
+        \item What's the purpose of statistics? How can it help us understand and transform the world?
+        \item Is statistics theory belongs to mathematics? Why?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example}
+    \begin{itemize}
+        \item In physics lab, we calcuate type-A uncertainty by calcuating the sample deviation $S$, and use formula $t_{n-1}\frac{S}{\sqrt{n}}$. Have you ever thought what's the principle behind the formula?(\st{I know you haven't. This course is so annoying.} But now you have survived this course and let's revisit these contents again).
+        \item In COVID-19 Hong Kong epidemic(2022 Feb-April), research has shown that the death rate for people who don't get vaccined is 2.87\%, while 0.14\% for fully vaccined(2 doses) and 0.03\% for boosted. Does that really show vaccine is so powerful?
+        \item In USA, before general election, there'll be polls. However, for many times we can find that the result is different from polls. What factors may contribute to the difference?
+    \end{itemize}
+    
+
+\end{frame}
+
+\section{My RC Plan}
+\begin{frame}
+    \frametitle{RC Plan}
+    My recitation class will contain these parts:
+    \begin{itemize}
+        \item review of concepts
+        \item exercise
+        \item subjective view on some ideas
+        \item extra topics and experiments(computer simulation)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Extra Topics}
+    Extra topics may include, but not limited to,
+    \begin{itemize}
+        \item history of some famous mathematicians or concepts
+        \item introduction to random process
+        \item game theory and gambling
+        \item some python package
+        \item related algorithms
+    \end{itemize}
+    
+\end{frame}
+
+\section{Concept Checking Paper}
+\begin{frame}
+    \frametitle{Concept Checking Paper}
+    Weekly concept revision. Initiated by previous VV186, 285, 286TA Leyang Zhang. Also used in VE203 SP2022.\par
+    \vspace{0.3cm}
+    Every week I'll post next week's concept checking paper. I may not release all the materials altogether at the beginning of the semester.
+
+
+
+\end{frame}
+
+
+\section{More resources}
+
+\begin{frame} 
+
+\frametitle{About Programming in this Course}
+Official language: Mathematica
+\begin{itemize}
+    \item powerful in mathematic calculation(like integral)
+    \item it's not usual ``program", it's notebook
+    \item may be in a mess if you don't use it properly
+    \item alternative: python, matlab, R, SPSS(if you happen to know how to use it)
+\end{itemize}
+Python
+\begin{itemize}
+    \item open source libraries
+    \item for this course: numpy, scipy, pandas
+    \item jupyter notebook
+\end{itemize}
+Matlab
+\begin{itemize}
+    \item commercial software which you're familar with
+    \item very powerful in mathematic modeling, hypothesis testing and linear regresson analysis
+\end{itemize}
+
+\end{frame}
+
+\section{Other Comments}
+\begin{frame}
+    \frametitle{Other comments for this course}
+    \begin{itemize}
+        \item Actually much ``easier'' than VV186, 285, 286 in terms of the abstraction of concepts.
+        \item Warning! If you think this course only consists of applying formula and using softwares, it will come at a cost of your grade. You need to understand the principle behind the concepts.
+        \item Contain many group works. Don't violate HC otherwise the whole team may be reported to honor council together. 
+        \item Also, any grade issues need to be raised within 2 weeks, otherwise they'll be automatically rejected. ``Legitimate concerns regarding grade-relevant scores communicated in a timely fashion, will of course always be treated in an objective manner. On the other hand, `hunting for points' in old assignments just so that a few tenths of a percentage point can lead to a jump into the next higher letter grade scale is not acceptable. ''
+    \end{itemize}
+    
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document} 

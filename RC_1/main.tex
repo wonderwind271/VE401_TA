@@ -1,0 +1,313 @@
+\documentclass{beamer} 
+\usepackage{amsmath,amsthm}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{soul}
+
+\usetheme{WVU}
+\usecolortheme{WVU}
+\usepackage{multirow}
+
+\mode<presentation> 
+
+\title[VE401 SU2022 RC week1]{VE401 SU2022 RC week1}
+
+\author[ Shuyu Wu ]{ Shuyu Wu }
+\institute[UM-SJTU JI]{UM-SJTU Joint Institute \vspace{.2cm} \\ \includegraphics[scale=0.3]{umji_logo.png}\\wushuyu2002@sjtu.edu.cn}
+\date[May 2022]{\today}
+
+\begin{document}
+\begin{frame} 
+
+\titlepage 
+
+\end{frame} 
+
+\begin{frame}
+       \frametitle{Outline}
+       \tableofcontents
+\end{frame}
+
+\section{Principles of Counting} 
+\begin{frame} 
+\frametitle{Binomial Coefficients} 
+$\tbinom{n}{k}$: Choose k elements from n objects and the order is not important
+\begin{itemize}
+    \item $\tbinom{n}{k}=\frac{n!}{k!(n-k)!}$
+    \item In high school we use $C_{n}^k$, but now you need to adapt yourselves to new symbol.
+\end{itemize}
+
+\end{frame} 
+
+\begin{frame}
+    \frametitle{ex 1.1}
+    1. (entrance exam, 2020 Shanghai) Select 4 people from 6 people to work on duty. Each of them works one day. We need 1 person for the first day, 1 person for the second day and 2 people for the third day. What's the number of the total method?\par
+    \vspace{0.3cm}
+
+    2. Distribute 15 students into 3 class, 5 students each. Among these 15 students there're 3 outstanding students. We want to have 1 outstanding student for each class. How many methods to distriute these students?
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 1.1 answer}
+    1. $\tbinom{6}{1}\tbinom{5}{1}\tbinom{4}{2}=180$\par
+    2. \par 
+    First distribute top students. The methods are $3!$\par
+    Then distribute other students. The methods are $\tbinom{12}{4}\tbinom{8}{4}\tbinom{4}{4}=34650$\par
+    So the total methods are $6*34650=207900$
+\end{frame}
+
+\section{Concepts of the Probability Theory}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Basic Concepts of the Probability Theory}
+    Sample Point: mathematical objects that may appear in a random experiment.\par
+    \vspace{0.3cm}
+    Sample Space: A set that contain all sample points.
+    \begin{itemize}
+        \item In high school, as well as many probability theory textbook, the definition is ``the set of all sample points".
+        \item example: Throw a dice and record its result. The sample space can be either $\{1,2,3,4,5,6\}$ or $N$.
+    \end{itemize}
+    Event: A subset of the sample space. Often denoted with a capital letter like $B$.
+    \begin{itemize}
+        \item The \textbf{sum} and \textbf{product} of two events $A$ and $B$ is $A\cup B$ and $A\cap B$ respectively. Another denotation is $A+B$ and $AB$.
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Probabilities of Events}
+    Cardano's Principle(Classical Probability): Let $A$ be a random outcome of an experiment
+    that may proceed in various ways. Assume each of these ways is equally likely. Then the probability $P[A]$ of the outcome $A$ is
+    \[P[A]=\frac{\text{number of ways leading to outcome A}}{\text{number of ways the experiment can proceed}}\]
+    \begin{itemize}
+        \item You may think it's too young, \underline{\hspace{2cm}}, \underline{\hspace{2cm}}.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{ex 1.2}
+    1. (hypergeometric distribution) There're N products, from which D of them are marked. Now we select n of these products, what's the probability to have k($k\leq D$) marked products?\par\vspace{0.3cm}
+    2. (lottary problem) There're N lottaries, from which n lottaries have prize. There're M people who draw one lottary in turn. What's the probability that the kth($k=1,2,...,M; M\leq N $) people win the lottary? What's your conclusion?
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 1.2 answer}
+    1.\par
+    Total situation: $\tbinom{N}{n}$, each situation has equal probability. The methods to get exactly k marked products: $\tbinom{D}{k}\tbinom{N-D}{n-k}$. So the probability is 
+    \[\frac{\tbinom{D}{k}\tbinom{N-D}{n-k}}{\tbinom{N}{n}}\]
+    2. \par
+    Total situation is $P_{N}^{M}$, each situation has equal probability. Suppose the kth people get the prize, the other $(M-1)$ people get $(N-1)$ prize. The methods are $n*P_{N-1}^{M-1}$, so the probability is
+    \[\frac{nP_{N-1}^{M-1}}{P_{N}^{M}}=\frac{n}{N}\]
+    And we draw the conclusion that the probability is independent from k. Everyone have the same chance.
+    
+    
+\end{frame}
+
+
+\begin{frame} 
+
+\frametitle{What's probability}
+The concept of ``probability'' is limited to Classical Probability, where we suppose each kind of ``atomic'' situation is equally likely. This approach is intuitive, but is stuck in a circular definition because ``equally likely'' is meaningless before we define probability in another way.\par
+\vspace{0.3cm}
+From our observation, we can find that the term ``probability'' is defined on the events of a sample space $S$, i.e., a map
+\[P: \mathscr{F}\rightarrow [0,1]\]
+where $\mathscr{F}$ is some of the subsets of S ($\mathscr{F}\subseteq 2^S $).
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{$\sigma$-field}
+    Clearly, not every map $P$ is eligible to become probability. $P$ should satisfy some properties. Before that, we first define the concept of $\sigma$-field.\par
+
+    A collection of some subsets of S, denoted as $\mathscr{F}$, is called $\sigma$-field if: 
+    \begin{enumerate}
+        \item $\varPhi  \in \mathscr{F}$
+        \item $A\in \mathscr{F} \Rightarrow	S\backslash A \in \mathscr{F}$
+        \item if $A_1, A_2, \dots \in \mathscr{F}$ is a finite or countable sequence of subsets, then the union $\bigcup\limits_{k}A_k \in \mathscr{F} $
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Axiomatic Approach of Probability}
+    Clearly, the family of events $\mathscr{F}$ should also be a $\sigma$-field. We then define what a probability map $P$ should satisfy:
+    \begin{enumerate}
+        \item Regularity: $P[S]=1$
+        \item Additivity for countable: if $A_1, A_2, \dots \in \mathscr{F}$ is a countable sequence of events, and $\forall i\neq j, A_i \cap A_j=\varPhi$, then $P[\bigcup\limits_k A_k]=\sum\limits_{k}P[A_k]$
+    \end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 1.3}
+    Can we randomly and equal likely pick one number from the following set? Please prove or disprove it.
+    \begin{itemize}
+        \item N
+        \item Q
+        \item R
+        \item $[0,1]$
+    \end{itemize}
+\end{frame}
+
+\section{Conditional Probability}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+\begin{frame}
+    \frametitle{Conditional Probability}
+    \textbf{definition}: $P[A|B]:=\frac{P[A\cap B]}{P[B]}$
+    \begin{itemize}
+        \item confirm that it satisfies the axiomatic of probability.
+    \end{itemize}
+    \textbf{total probability formula}:
+    \[P[B]=\sum\limits_{k=1}^n P[B|A_k]P[A_k]\]
+    where $A_1, A_2,\dots, A_n$ are mutually exclusive and $A_1\cup A_2\cup \dots A_n=S$
+\end{frame}
+
+\begin{frame}
+    \frametitle{independent Events}
+    \begin{itemize}
+        \item \textbf{definition}: Two events, $A$ and $B$, are called \textbf{independent} if and only if $P[A\cap B]=P[A]P[B]$
+        \item \textbf{corollary}: If $A$ and $B$ are independent, 
+        \begin{enumerate}
+            \item $P[A]\neq 0$, then $P[B|A]=P[B]$
+            \item $P[B]\neq 0$, then $P[A|B]=P[A]$
+        \end{enumerate}
+        \item What's the definition that three events, $A,B,C$ are independent?
+        \item<2-> $P[A\cap B]=P[A]P[B], P[A\cap C]=P[A]P[C],P[B\cap C]=P[B]P[C]$, and $P[A\cap B\cap C]=P[A]P[B]P[C]$
+        \item<2-> Is the condition ``$P[A\cap B\cap C]=P[A]P[B]P[C]$" useless?
+
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{independent Events}
+    No!\par
+    Take $S=\{1,2,3,4\}, $take one of the number equal likely, and set $A=\{1,2\}, B=\{1,3\}, C=\{1,4\}$,  we can find that $P[A]=P[B]=P[C]=\frac{1}{2}, P[AB]=P[BC]=P[AC]=\frac{1}{4}$, but $P[ABC]=\frac{1}{4}$, not $\frac{1}{8}$.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Bayes's Theorem}
+    Please take 30 seconds to derive Bayes's Theorem by yourself. Hint: 
+    \[P[A_k|B]=\frac{P[B\cap A_k]}{P[B]}=\dots\]
+    \onslide<2-> \[P[A_k|B]=\frac{P[B\cap A_k]}{P[B]}=\frac{P[B|A_k]P[A_k]}{\sum\limits_{j=1}^n P[B|A_j]P[A_j]}\]
+    where $A_1, A_2,\dots, A_n$ are mutually exclusive and $A_1\cup A_2\cup \dots A_n=S$\par
+    \vspace{0.3cm}
+    \textbf{corollary}: $P[A|B]=\frac{P[B|A]P[A]}{P[B|A]P[A]+P[B|\bar{A}]P[\bar{A}]}$
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 1.4}
+    (binomial distribution) In one round of experiment, your probability to get result A is $p$ and probability to get result B is $1-p$. Now you do $n$ rounds of independent experiment. What's the probability to get $k$ result of A?\par
+    \vspace{0.3cm}
+    \onslide<2-> For a certain permutation of result, the probability to get $k$ A and $(n-k)$ B is $p^{k}(1-p)^{n-k}$ by the independence of the experiment. Now the permutation is not important, and the total permutation is $\tbinom{n}{k}$(choose k place out of n experiment and give them result A), so the answer is 
+    \[\tbinom{n}{k} p^{k}(1-p)^{n-k}\]
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 1.5}
+    (a very classic problem) There's a type of method to determine cancer. If the examinee is healthy, there's 1\% that the method report positive result. If the examinee does have cancer, there's 1\% that the method report negative result.\par
+    Given that 0.01\% people have this kind of cancer, what's the probability that a person who get positive result get cancer?\par
+    \vspace{0.3cm}
+    \onslide<2-> The answer is $\frac{1}{102}$.  Set A: get cancer and B: get positive result.
+    Plug in the data to Bayes's formula and you  get the result.\par
+    \vspace{0.3cm}
+    \begin{enumerate}
+        \item $P[A|B]$ is very different from $P[B|A]$
+        \item Bayes's formula is good at solving $P[A|B]$ when $P[B|A]$ and other data is avaliable.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 1.6}
+
+    Four people, A, B, C and D, are playing a game: they throw a dice(with number 1-6) in turn and the one who gets the smallest number wins the game. If some people get the same smallest number, these people roll the dice again with the same rule(other people who don't get the smallest number are eliminated) until only one person get the smallest number.\par
+    The person A rolls the dice first, and he gets 3. What's the probability that he wins the game finally?
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 1.6 answer}
+    We need to realize one important thing: if $k$ people get the same smallest number, all of them have $\frac{1}{k}$ probability to win the game because the rule is equal to everyone before they roll the dice. There's no need to consider what will happen in the second round and what's the probability that they go to the 3rd, 4th, \dots round.\par
+    Set $E_i:$ i people get 3, while other $(3-i)$ people get more than 3. $P_i:$ A wins when $E_i$ happen.\par
+    By total probability formula, the answer $p=\sum\limits_{i=0}^3 P[E_i] P[P_i]$\par
+    We can find that $P[P_i]=\frac{1}{i+1}$.\par
+    \[P[E_0]=(\frac{1}{2})^3=\frac{1}{8}, P[E_1]=3*(\frac{1}{2})^2*\frac{1}{6}=\frac{1}{8}\]
+    \[P[E_2]=3*\frac{1}{2}*(\frac{1}{6})^2=\frac{1}{24}, P[E_3]=(\frac{1}{6})^3=\frac{1}{216}\]
+    And plug in all the data and we can find the answer $p=\frac{175}{864}$
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 1.7}
+    \textit{(This exercise is adapted from real life)}\par
+    As we all know, a TA needs to make RC slides every week. It usually takes a TA hours of time to make one week's slide. So, it's common practice for some TA to ``borrow'' slides from previous years' TA.\par
+    Usually, as a student, you won't find it since many concepts are the same. However, one day you find two TAs make the same mistake in one week's RC slide, which raises much suspicious. Suppose when TA is making RC slides, he has 0.4 probability to ``borrow'' RC slides from previous TA. Also, a TA has 0.01 probability to make a mistake for a concept when making slides. Suppose previous TA made slides by himself.\par
+    \begin{enumerate}
+        \item What's the probability that they both ``borrow'' the slide from previous TA?
+        \item Suppose the previous TA is very careless, and has 0.02 probability to make a mistake in that concept. But because of that, the TAs in this semester have 0.2 probability to find out the mistake if they ``borrow'' the slide. What's the probability that they both ``borrow'' the slide?
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 1.7 answer}
+    Let's denote the previous TA as No.0, and the current TA No.1 and No.2.\par
+    Set: $F_i$: No.i makes mistake.\par
+    $B_i$: No.i ``borrows'' the slide from previous TA. \par
+    $E_i$(or $F_i|\overline{B_i}$): No.i makes mistake when making slides by himself. \par
+    1. \par
+    $P[E_0]=P[E_1]=P[E_2]=0.01$, $P[B_1]=P[B_2]=0.4$ \par
+    What we need is
+    \tiny
+    \begin{align*}
+         & P[B_1 B_2|F_1 F_2] \\
+        =& \frac{P[B_1 B_2 F_1 F_2]}{P[F_1 F_2]}\\
+        =& \frac{P[E_0]P[B_1]P[B_2]}{P[E_0]P[B_1]P[B_2]+P[E_1]P[\overline{B_1}]P[E_0]P[B_2]+P[E_2]P[\overline{B_2}]P[E_0]P[B_1]+
+        P[E_1]P[E_2]P[\overline{B_1}]P[\overline{B_2}]}\\
+        =& 0.9501
+    \end{align*}
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 1.7 answer}
+    2. \par
+    It's equal to say that $P[E_0]=0.02*(1-0.2)=0.016$. Plug into the same formula and we get the result is 0.9578.
+    
+\end{frame}
+
+\section{Q\&A}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+\begin{frame}
+    \frametitle{Q\&A}
+    Thank you!\par
+    \vspace{0.3cm}
+    If you have any question, feel free to unmute yourself. \par
+    \vspace{0.3cm}
+    Also, this is the first time I use latex beamer to make RC slides. If you have any practical suggestions regarding to latex and latex beamer, I'd appreciate it very much if you could share with me.
+
+    
+
+\end{frame}
+
+\end{document} 
