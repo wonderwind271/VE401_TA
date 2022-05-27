@@ -1,0 +1,365 @@
+\documentclass{beamer} 
+\usepackage{amsmath,amsthm}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{soul}
+\usepackage{listings}
+
+\usetheme{WVU}
+\usecolortheme{WVU}
+\usepackage{multirow}
+
+\mode<presentation> 
+
+\title[VE401 SU2022 RC week3]{VE401 SU2022 RC week3}
+
+\author[ Shuyu Wu ]{ Shuyu Wu }
+\institute[UM-SJTU JI]{UM-SJTU Joint Institute \vspace{.2cm} \\ \includegraphics[scale=0.3]{umji_logo.png}\\wushuyu2002@sjtu.edu.cn}
+\date[May 2022]{\today}
+
+\begin{document}
+\begin{frame} 
+
+\titlepage 
+
+\end{frame} 
+\section{Continuous Random Variables} 
+\begin{frame}
+       \frametitle{Outline}
+       \tableofcontents[currentsection]
+\end{frame}
+
+
+\begin{frame} 
+    \frametitle{Continuous Random Variables} 
+    \textbf{Probability Density Function (for non-discrete random variable)}: For a non-discrete random variable $X$, if there exists a function $f_X(x)$ such that 
+    \[P[a\leq X\leq b]=\int_{a}^{b}f_{X}(x)dx\]
+    and 
+    \[f_X(x)\geq 0, \int_{-\infty}^{+\infty}f_{X}(x)dx=1\]
+    If $X$ have PDF defined above, then we say $X$ is a continuous random variable.
+
+\end{frame} 
+
+\begin{frame}
+    \frametitle{Cumulative Distribution Function(CDF)}
+    The \textbf{cumulative distribution function} of a random variable is defined as $P[X\leq x]$. It's monotonous without decreasing, and can be denoted as $F_X(x)$.\par
+    If $F_X(x)$ is differentiable, then the derivative is the PDF($F_X'(x)=f_X(x)$), and $X$ is a continuous random variable.
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Expectation and Variance}
+    The expectation of a continuous random variable is defined as follow: 
+    \[E[X]:=\int_{-\infty}^{+\infty}xf_X(x)dx\]
+    If the integral above converges absolutely.\par
+    The variance is defined as:
+    \[Var[X]:=E[X^2]-E[X]^2\]
+    And for a given function $\varphi$, we have
+    \[E[\varphi(X)]=\int_{-\infty}^{+\infty}\varphi(x)f_X(x)dx\]
+   
+\end{frame}
+
+\section{Exponential Distribution and Gamma Distribution}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Exponential Distribution}
+    A continuous random variable with PDF $f_X(x)=\beta e^{-\beta x}(x\geq 0)$ is called an exponential distribution with parameter $\beta$.\par
+    Some important properties of exponential distribution:
+    \begin{itemize}
+        \item $E[X]=\frac{1}{\beta}$
+        \item $Var[X]=\frac{1}{\beta^2}$
+        \item m.g.f: $m_X(t)=(1-\frac{t}{\beta})^{-1}$
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Memoryless Property}
+    The exponential distribution has a special property called "memoryless property", i.e., 
+    \[P[X>s+t|X>s]=P[X>t]\]
+    And vice versa. It's the only continuous distribution that satisfy this property.\par
+    An LED's lifetime is likely to follow an exponential distribution. That is to say, when we have already used an LED for s hours and it's not broken, the expected lifetime is the same as a new LED. The LED won't "remember" that it has already used for s hours.\par
+    Human lifetime doesn't follow an exponential distribution. It's not memoryless.
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Gamma Distribution}
+    Has two parameter: $\alpha$ and $\beta$. It's PDF is tedious and you do not need to remember it.
+    When $\alpha=1$, this is the exponential distribution.\par
+    If $X$ follows a Gamma distribution with parameter $\alpha$ and $\beta$,
+    \begin{itemize}
+        \item $E[X]=\frac{\alpha}{\beta}$
+        \item $Var[X]=\frac{\alpha}{\beta^2}$
+        \item m.g.f $m_X(t)=(1-\frac{t}{\beta})^{-\alpha}$
+    \end{itemize}
+    The sum of $\alpha$ i.i.d random variable with parameter $\beta$ is the Gamma distribution with parameter $\alpha$ and $\beta$. This can be seen from the m.g.f.
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Connection With Poission Distribution}
+    In a Poission process, the probability to get x arrivals is $\frac{(\lambda t)^x}{x!}e^{-\lambda t}$. It's a Poission distribution with parameter $\lambda t$.\par
+    The time to the first arrival $T$ follows an exponential distribution with parameter $\lambda$.\par
+    The time to the $r^{th}$ arrival $T_r$ follows a Gamma distribution with parameter r and $\lambda$.
+
+\end{frame}
+
+
+
+\section{Normal Distribution}
+
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Normal Distribution}
+    The PDF of \textbf{normal distribution} is
+    \[f_X(x)=\frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(\frac{x-\mu}{\sigma})^2}{2}} \]
+The random variable with such PDF is said to follow a normal distriution with parameter $\mu$ and $\sigma$, denoted as $X\sim N(\mu, \sigma)$(in Horst's slide) or $X\sim N(\mu, \sigma^2)$(in other textbook).\par
+The expectation is $\mu$ and the variance is $\sigma^2$. The standard deviation is $\sigma$.\par
+The m.g.f of normal distribution is $e^{\mu t+\frac{\mu^2 t^2}{2}}$. Again, from the m.g.f we can see that
+\[X_1\sim N(\mu_1,\sigma_1^2), X_2\sim N(\mu_2, \sigma_2^2)\Rightarrow X_1+X_2\sim N(\mu_1+\mu_2, \sigma_1^2+\sigma_2^2)\]
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Standard Normal Distribution}
+    If $X\sim N(\mu, \sigma^2)$, then $Z:=\frac{X-\mu}{\sigma}\sim N(0,1)$ is said to follow a standard normal distribution.\par
+    The PDF for standard normal distribution is $f_{Z}(z)=\frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}}$
+
+    The CDF of standard normal distribution is denoted as $\Phi(z)$.\par
+    \[\Phi(z)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{z}e^{-\frac{t^2}{2}}dt\]
+    Unluckily, it's not an elementary function. We look up a table of $\Phi$ value in practice.
+    In python, we can use `scipy.stats.norm.cdf(x)` to get the value of $\Phi(x)$.
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 3.1}
+    1. The mass of a kind of product follows a normal distribution with mean 200 and variance 100. Randomly pick a product, what's the probability that the mass is in the range of [185,210]?\par
+    \vspace{0.3cm}
+    2. If the mass of the product is within the top 5\%, we regard them as ``heavier than normal". What's the threshold for a product to be ``heavier than normal"?
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 3.1 answer}
+    1. 
+    \begin{align*}
+        & \sigma=10\\
+        & P[185\leq X \leq 210]\\
+        = & P[\frac{185-200}{10}\leq \frac{X-200}{10}\leq \frac{210-200}{10}]\\
+        = & P[-1.5\leq Z \leq 1]\\
+        = & \Phi(1)-\Phi(-1.5)\\
+        = & \Phi(1)-(1-\Phi(1.5))=0.8413-(1-0.9332)\\
+        = & 0.7745
+    \end{align*}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 3.1 answer}
+    2.
+    \begin{align*}
+        & P[X\leq x]=0.95\\
+        & P[Z \leq \frac{x-200}{10}]=0.95\\
+        & \Phi(\frac{x-200}{10})=0.95\\
+        & \frac{x-200}{10}=1.64\\
+        & x=216.4
+    \end{align*}
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{$3 \sigma$ rule}
+    $3\sigma$ rule: The sample of a normal random variable is very likely to fall in the range of $\mu\pm 3\sigma$. The probability is $\Phi(3)-(1-\Phi(3))=0.997$.\par
+    On the other hand, if you randomly pick a sample and find that it falls out of that range, you have evidence to suspect the correctness of $\mu$ or $\sigma$. This is the topic of statistics.\par
+
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Chebyshev Inequality}
+    For a random variable $X$. If its expectation and variance exist, then
+    \[P[-m\sigma <X-\mu < m\sigma]\geq 1-\frac{1}{m^2}\]
+    Since $X$ can be any random variable, this estimation is very rough. However, it plays an important role in theoretical proof, like the proof of the weak law of large number.
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Transformation of Random Variables}
+    For a continuous random variable $X$, we know it's PDF $f_X(x)$. Now we want to calculate the PDF of $Y$, where $Y=\varphi(X)$.\par
+    General method: From $f_X(x)$ we can derive X's CDF $F_X(x)$, which is $P[X\leq x]$. On the other hand, the CDF of Y, $P[Y\leq y]=P[\varphi(X)\leq y]$. We can then solve this inequality and interpret these intervals with the CDF of $X$.\par
+    If $\varphi$ is monotonically increasing, then $P[Y\leq y]=P[X\leq \varphi^{-1}(y)]=F_X(\varphi^{-1}(y))$. Take derivative and we get $f_Y(y)=f_X(\varphi^{-1}(y))\frac{d\varphi^{-1}(y)}{dy}$. The proof is same if $\varphi$ is monotonically decreasing. The result is $f_Y(y)=f_X(\varphi^{-1}(y))|\frac{d\varphi^{-1}(y)}{dy}|$.\par
+    When $\varphi$ is not monotonic we don't have a formula, and you need to do the process above.
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 3.2}
+    Calculate the PDF of $Y:=Z^2$, where $Z$ is the standard normal distribution.\par
+    $f_Z(z)=\frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}}$\par
+    Can you use the formula $f_Y(y)=f_X(\varphi^{-1}(y))|\frac{d\varphi^{-1}(y)}{dy}|$?
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 3.2 answer}
+    You can't use that formula because $\varphi(Z)=Z^2$ isn't a monotonic function. You need to use the general method.\par
+    \begin{align*}
+        & P[Y\leq y]\\
+        = & P[Z^2 \leq y]\\
+        = & P[-\sqrt{Y} \leq Z\leq \sqrt{Y}]\\
+        = & P[Z\leq \sqrt{Y}]-P[Z \leq -\sqrt{Y}]\\
+        = & \Phi(\sqrt{y})-(1-\Phi(\sqrt{y}))=2\Phi(\sqrt{y})-1\\
+    \end{align*}
+    Take derivative and we get:
+    \begin{align*}
+        f_Y(y)=2f_Z(\sqrt{y})*\frac{1}{2\sqrt{y}}=\frac{1}{\sqrt{2\pi y}}e^{-\frac{y}{2}}
+    \end{align*}
+    This is a \textbf{chi-squared distribution} with freedom 1.
+
+\end{frame}
+
+\section{Central Limit Theorem}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Central Limit Theorem}
+    There're 3 versions of Central Limit Theorem:
+    \begin{enumerate}
+        \item de Moivre - Laplace: Approximate $B(n,p)$ to normal distribution
+        \item Lindeberg-Levy: Approximate n i.i.d random variable's sum to normal distribution
+        \item Lyapunov: Approximate n independent random variable's sum to normal distribution(no need to be identical distributed, but with some other condition)
+    \end{enumerate}
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Central Limit Theorem(de Moivre - Laplace)}
+    When n is very large, the PDF of $B(n,p)$ is approximately $N(np, np(1-p))$. i.e., 
+    \[\lim_{n\rightarrow \infty}P[a<\frac{S_n-np}{\sqrt{np(1-p)}}<b]=\frac{1}{\sqrt{2\pi}}\int_{a}^{b}e^{-\frac{x^2}{2}}dx\]
+    \textbf{Half-Unit Correction}: $P[X\leq y]\approx \Phi(\frac{y+0.5-np}{\sqrt{np(1-p)}})(y\in \mathbb{Z})$
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 3.3}
+    $X\sim B(100, 0.05)$, find $P[X\leq 8]$ by
+    \begin{enumerate}
+        \item direct calculation (Casio calculator is enough)
+        \item Poission approximation
+        \item Normal approximation(without half-unit correction)
+        \item Normal approximation(with half-unit correction)
+    \end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 3.3 answer}
+    1. \par
+    $P[X=x]=\binom{100}{x}0.05^x 0.95^{100-x}$\par
+    The answer is $\sum\limits_{x=0}^{8} \binom{100}{x}0.05^x 0.95^{100-x}=0.9369$\par
+    2. \par
+    $P[X=x]\approx \frac{5^x e^{-5}}{x!}$\par
+    The answer is $\sum\limits_{x=0}^{8} \frac{5^x e^{-5}}{x!}=0.9319$\par
+    3. \par
+    $P[X=8]\approx \Phi(\frac{8-5}{\sqrt{5*0.95}})=\Phi(1.376)=0.916$\par
+    4. \par
+    $P[X=8]\approx \Phi(\frac{8+0.5-5}{\sqrt{5*0.95}})=\Phi(1.61)=0.9463$
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Central Limit Theorem(Lindeberg-Levy)}
+    The most "classic" version of central limit theorem.\par
+    \vspace{0.3cm}
+    $X_1, X_2, \dots , X_n$ are n i.i.d random variables with $E[X_i]=\mu$, $Var[X_i]=\sigma^2$, then it's easy to see that
+    \begin{enumerate}
+        \item $E[\sum\limits_{i=1}^{n}X_n]=n\mu$
+        \item $Var[\sum\limits_{i=1}^{n}X_n]=n\sigma^2$
+    \end{enumerate}
+    The central limit theorem claims that as long as n is big enough, the sum $\sum\limits_{i=1}^{n}X_n$ follows a normal distribution with expectation and variance above.\par
+    \vspace{0.3cm}
+    It's important to notice that when n is big enough, the average of $X_1, X_2, \dots , X_n$ also approximately follows a normal distribution with expectation $\mu$ and variance $\frac{\sigma^2}{n}$.
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 3.4}
+    $X$ is a discrete uniform random variable with range $\{1,2,\dots, 6\}$. $X_1, X_2, \dots , X_{100}$ are 100 i.i.d sample of $X$. What's the probability that the sum of these 100 numbers falls in the range of $[300, 399]$?
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 3.4 answer}
+    Use the central limit therorem. Set $M:=\sum\limits_{i=1}^{100}X_i$, then $E[M]=350, Var[M]=100*Var[X]=100*\frac{35}{12}=291.67$. $M$ approximately follows $N(350, 17.078^2)$. \par
+    \begin{align*}
+        & P[300\leq M\leq 399]\\
+        = & P[299.5\leq M \leq 399.5]\\
+        = & P[-2.957\leq M \leq 2.898]\\
+        = & 0.9981-0.0016=0.9965
+    \end{align*}
+
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 3.4 answer(theoretical value)}
+    By comparation, let's calculate the theoretical value of the probability. The total conditions are $6^{100}$, and we need to calculate how many methods can lead to a sum in [300, 399]. That is the sum of coefficients from $x^{300}$ to $x^{399}$ in the expression $(x+x^2+x^3+x^4+x^5+x^6)^{100}$. By mathematica calculation the result is
+    \tiny
+    \[\frac{6511438337936944025703443369371710744151388080536705553221802328719232
+    98151381}{6533186235000709060966902671580578205371437104729548715430719663694971
+    41477376}=0.99667\]
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Central Limit Theorem(Lyapunov)}
+    This version is the most generalized version. As long as n is big enough, there's even no need for $X_1, X_2, \dots , X_n$ to be identical distributed. The expectation and variance of each random variable should exist. There're some other requirements, which is not covered in this course.
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Why type-A uncertainty is normal distributed}
+    \[u_{A}=t_{n-1}\frac{S}{\sqrt{n}}\]
+
+\end{frame}
+
+\section{Q\&A}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+\begin{frame}
+    \frametitle{extra topic and Q\&A}
+    You're recommended to summarize the properties of exponential distribution, gamma distribution and normal distribution into a table.\par
+    Also, the sample midterm exam is avaliable on canvas, and now you can finish exercise 2-13.
+    
+\end{frame}
+
+\end{document} 
