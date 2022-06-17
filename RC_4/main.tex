@@ -1,0 +1,372 @@
+\documentclass{beamer} 
+\usepackage{amsmath,amsthm}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{soul}
+\usepackage{listings}
+\usepackage{bm}
+
+\usetheme{WVU}
+\usecolortheme{WVU}
+\usepackage{multirow}
+
+\mode<presentation> 
+
+\title[VE401 SU2022 RC week4]{VE401 SU2022 RC week4}
+
+\author[ Shuyu Wu ]{ Shuyu Wu }
+\institute[UM-SJTU JI]{UM-SJTU Joint Institute \vspace{.2cm} \\ \includegraphics[scale=0.3]{umji_logo.png}\\wushuyu2002@sjtu.edu.cn}
+\date[June 2022]{\today}
+
+\begin{document}
+\begin{frame} 
+
+\titlepage 
+
+\end{frame} 
+\section{Multivariate Random Variables} 
+\begin{frame}
+       \frametitle{Outline}
+       \tableofcontents[currentsection]
+\end{frame}
+
+
+\begin{frame} 
+    \frametitle{Multivariate Random Variables} 
+    \textbf{definition}: A map from sample space $S$ to a countable subset of $R^n, \Omega$. i.e., 
+    \[\bm{X}: S\rightarrow \Omega\subset R^n\]
+    \textbf{Classification}: discrete multivariate random variable, continuous multivariate random variable and other.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Discrete Multivariate Random Variable}
+    A multivariate random variable with probability $f_X: \Omega\rightarrow R$ that satisfy
+    \begin{enumerate}
+        \item $f_X(x)\geq 0 \text{ for }  \forall x=(x_1,x_2,\dots , x_n)\in \Omega$
+        \item $\sum\limits_{x\in\Omega}f_X(x)=1 $
+    \end{enumerate}
+    The function $f_X(x)$ is called the joint density function of $X$.
+    $X=(X_1, X_2, \dots , X_n)$, where $X_1, X_2, \dots , X_n$ are all single random variable.\par
+    $f_X(x)=P[X_1=x_1, X_2=x_2, \dots , X_n=x_n]$.\par
+    We can also write $f_{X_1 X_2 \dots X_n}(x_1, x_2,\dots , x_n)$ instead of $f_{\bm{X}}(\bm{x})$.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Marginal Density}
+    Clearly, for a multivariate random variable $(X,Y)$, $P[X=x]=\sum\limits_{y_i}P[X=x, y=y_i]=\sum\limits_{y_i}f_{XY}(x, y_i)$\par
+    Since $f_X(x)=P[X=x]$ is the density function of $X$, we call it the marginal density of $(X,Y)$.\par
+    The definition can be generalized to n dimension situation.
+    
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 4.1}
+    Randomly and equal likely pick a number from $1,2,3,4$ and denoted as $X$; randomly pick an integar from 1 to $X$. What's the joint density function and marginal density of $(X, Y)$?
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 4.1 answer}
+    
+\begin{table}[H]
+    \centering
+    
+      \begin{tabular}{l|rrrr|r}
+      X\textbackslash{}Y & 1     & 2     & 3     & 4     & \multicolumn{1}{l}{$f_X(x)$} \\
+      \hline
+      \multicolumn{1}{r|}{1} & 0.25  & 0     & 0     & 0     & 0.25 \\
+      \multicolumn{1}{r|}{2} & 0.125 & 0.125 & 0     & 0     & 0.25 \\
+      \multicolumn{1}{r|}{3} &   1/12 &   1/12 &   1/12 & 0     & 0.25 \\
+      \multicolumn{1}{r|}{4} &   1/16 &   1/16 &   1/16 &   1/16 & 0.25 \\
+      \hline
+      $f_Y(y)$    & 0.52083333 & 0.270833 & 0.145833 & 0.0625 & 1 \\
+      \end{tabular}%
+    \label{tab:addlabel}%
+  \end{table}%
+  
+\end{frame}
+
+\begin{frame}
+    \frametitle{Independence of Random Variables}
+    Clearly, from the example above we see that $f_{XY}(x,y)$ may not equal to $f_X(x)f_{Y}(y)$. If the equality hold, we say that $X$ and $Y$ are independent.\par
+    \vspace{0.3cm}
+    $X$ and $Y$ are independent, if and only if the joint density function is the corresponding multiplication of the two marginal density.
+    
+\end{frame}
+
+
+
+\begin{frame}
+    \frametitle{Conditional Density}
+    The definition of conditional probability is $P[A|B]=\frac{P[A\cap B]}{P[B]}$. Clearly, this can be applied to multivariate random variable.\par
+    We define the conditional density as 
+    \[f_{X_1|x_2}(x_1)=\frac{f_{X_1X_2}(x_1,x_2)}{f(x_2)}\]
+    That is the probability density function of $X_1$ when $X_2=x_2$ happens.
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Continue Multivariate Random Variable}
+    \textbf{definition}: A continuous random variable is a map from sample space $S$ to a subset of $R^n, \Omega$. i.e., 
+    \[\bm{X}: S\rightarrow R^n\]
+    together with its joint probability density function $f_{X}:R^n\rightarrow R$ that satisfy
+    \begin{enumerate}
+        \item $f_{\bm{X}}(x)\geq 0$
+        \item $\int_{R^n}f_{X}(x)dx=1$
+    \end{enumerate}
+    For any event $\Omega$ in $R^n$, $P[x\in\Omega]=\int_{\Omega}f_{X}(x)dx$.\par
+    This is a multivariate integral. \par
+    \vspace{0.3cm}
+    Wait, do you still remember how to calculate a multivariate integral?
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{review of multivariate integral}
+
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 4.2}
+    $X, Y, Z\sim U(0,1)$ and they are independent($U(a,b)$ is the uniform distribution on interval [a,b]). What's the joint distribution of $(X,Y,Z)$, and what's the probability that $Z>XY$?
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 4.2 answer}
+    The joint probability density function is
+    \begin{equation*}
+        f_{XYZ}(x,y,z)=
+        \begin{cases}
+            1 & x,y,z\in[0,1]\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    So we can calculate $P[Z>XY]$ by 3 dimension multivariate integral.
+    \begin{align*}
+         & P[Z>XY]\\
+        =& \iiint\limits_{z>xy}f_{XYZ}(x,y,z)dxdydz\\
+        =& \int_{0}^{1}dx\int_{0}^{1}dy\int_{xy}^1dz\\
+        =& \int_{0}^{1}dx\int_{0}^{1}(1-xy) dy=\frac{3}{4}
+    \end{align*}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Expectation}
+    The Expectation of a multivariate random variable $X=(X_1, X_2, \dots , X_n)$ is a vector $(E[X_1], E[X_2], \dots , E[X_n])$.\par
+    To calculate the expectation of marginal density, $E[X_1], E[X_2], \dots , E[X_n]$, the formula is
+    \[E[X_k]=\sum\limits_{x\in \Omega}x_k f_{X}(x)\]
+    for discrete random variable and
+    \[E[X_k]=\int_{R^n}x_kf_{X}(x)dx\]
+    for continuous random variable.
+
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Expectation of Functions of Random Variable}
+    Suppose $X$ is an n-dimension random variable and $\varphi: R^n\rightarrow R$. In this way, $\varphi(X)$ is a single random variable, and its expectation is:
+    \[E[\varphi(X)]=\sum\limits_{x\in \Omega}\varphi(x)f_{X}(x)\]
+    for discrete random variable and
+    \[E[\varphi(X)]=\int_{R^n}\varphi(x)f_{X}(x)dx\]
+    for continuous random variable.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Variance and Covariance}
+    The sum of variance of two random variable $X$ and $Y$ is
+    \[Var[X+Y]=Var[X]+Var[Y]+2E[(X-E[X])(Y-E[Y])]\]
+    We define the \textbf{covariance} of $X$ and $Y$, $Cov[X,Y]=E[(X-E[X])(Y-E[Y])]$
+    \begin{itemize}
+        \item $Cov[X,Y]=Cov[Y,X]$
+        \item $Cov[X,X]=Var[X]$
+    \end{itemize}
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Covariance Matrix}
+    For $X=(X_1, X_2, \dots , X_n)$, $Var[X]$ is an n*n matrix and
+    \[(Var[X])_{ij}=Cov[X_i,X_j]\]
+    \begin{itemize}
+        \item $Var[CX]=C\, Var[X] C^{T}$
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Covariance}
+    Calculation: $Cov[X,Y]=E[XY]-E[X]E[Y]$\par
+    If $X$ and $Y$ are independent, then $Cov[X,Y]=0$. However, $Cov[X,Y]=0$ doesn't imply independence.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{(Pearson) Correlation Coefficient}
+    \textbf{definition:} The correlation coefficient of $X$ and $Y$, $\rho_{XY}$, is defined as $Cov[\tilde{X}, \tilde{Y}]=\frac{Cov[X,Y]}{\sqrt{Var[X]Var[Y]}}$\par
+    The definition is very similar to the angle between two vector. Actually, the process of Gram-Schmidt orthogonalization in linear algebra corresponds to a process called \textbf{principal component analysis, PCA}, which is an important method in data analysis. We may talk about it as an extra topic later.\par
+    \textbf{property:} 
+    \begin{itemize}
+        \item $\rho_{XY}\in[-1,1]$
+        \item $|\rho_{XY}|=1$ if and only if $\exists \beta_{0}, \beta_{1}\neq 0$ such that $P[Y=\beta_{0}+\beta_{1}X]=1$. When $\beta_{1}>0$, $\rho_{XY}=1$. When $\beta_{1}<0$, $\rho_{XY}=-1$.
+        \item fisher transform: $\text{Arctanh}(\rho_{XY})=\ln(\sqrt{\frac{Var[\tilde{X}+\tilde{Y}]}{Var[\tilde{X}-\tilde{Y}]}})$
+    \end{itemize}
+    
+\end{frame}
+
+\section{The Law of Large Numbers}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Law of Large Numbers}
+    Right or wrong? 
+    \begin{itemize}
+        \item When $E[X]=\mu$ exists, and $X_1, X_2, \dots , X_n$ are n i.i.d sample of $X$, then $\lim\limits_{n\rightarrow\infty} \frac{\sum\limits_{i=1}^{n}X_i}{n}=\mu$
+    \end{itemize}
+    Wait, what's the definition of the limit of sequence?\par
+    \[\forall \varepsilon>0, \exists N\in N, \forall n>N, |a_{n}-A|<\varepsilon\]
+    Now I take $\varepsilon=0.01$, $N$ doesn't exist.
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Law of Large Numbers}
+    \textbf{The Weak Law of Large Numbers}: $\lim\limits_{n\rightarrow\infty}P[|\frac{\sum\limits_{i=1}^{n}X_i}{n}-\mu|\leq\varepsilon]=1$ for $\forall \varepsilon>0$\par
+    \begin{itemize}
+        \item Can be proved by Chebyshev inequality when supposing $Var[X]$ exists.
+    \end{itemize}
+    \vspace{0.3cm}
+    \textbf{The Strong Law of Large Numbers}: $P[\lim\limits_{n\rightarrow\infty} \frac{\sum\limits_{i=1}^{n}X_i}{n}=\mu]=1$
+    \begin{itemize}
+        \item Very hard to prove.
+        \item When supposing $E[X^4]$ exists, it'll be easier to prove. However, it's still very hard.
+    \end{itemize}
+    
+\end{frame}
+
+\section{Hypergeometric Distribution}
+
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Hypergeometric Distribution}
+    $N$ balls, $r$ are targets. Take n balls and denote $X$ to be the target balls you get. We say $X$ follows a hypergeometric distribution. The PDF is
+    \[P[X=x]=\frac{\binom{r}{x}\binom{N-r}{n-x}}{\binom{N}{n}}\]
+    Each trial is a non-independent but identical distribution.
+    Property:
+    \begin{itemize}
+        \item $E[X]=n\frac{r}{N}$
+        \item $Var[X]=n\frac{r}{N}\frac{N-r}{N}\frac{N-n}{N-1}$
+    \end{itemize}
+\end{frame}
+
+\section{Transformation of Random Variables}
+
+\begin{frame}
+    \frametitle{Transformation of Variables}
+    The formula is the generalization of single variable version.\par
+    $X$ is a continuous multivariate random variable with joint density function $f_{X}(x)$. $\varphi: R^n\rightarrow R^n$ is an differentiable and invertible map with inverse $\varphi^{-1}$. Then $Y=\varphi(X)$ joint density function
+    \[f_{Y}(y)=f_X(\varphi^{-1}(y))|det\, D\varphi^{-1}(y)|\]
+    Wait, Wait! What's Jacobian?
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 4.3}
+    Given the joint probability density function of $(X,Y)$, derive the probability density function of $X+Y$, $X-Y$ and $XY$.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 4.3 answer}
+    Consider the map $\varphi: (X,Y)\rightarrow (U,V), (x,y)\mapsto (x+y,y)$. The marginal density of $U$ is $X+Y$.\par
+    $\varphi^{-1}(u,v)=(u-v,v)$. 
+    $$
+    \left |\begin{array}{cccc}
+    1 &-1    \\
+    0 & 1 \\
+    \end{array}\right|=1
+    $$
+    Then the joint distribution of $(U,V)$ is
+    \[f_{XY}(u-v,v)\]
+    And the density function of $U=X+Y$ is 
+    \[\int_{-\infty}^{+\infty}f_{XY}(u-v,v)dv\]
+    
+
+\end{frame}
+\begin{frame}
+    \frametitle{ex 4.3 answer}
+    By the same method, 
+    \[f_{X-Y}(u)=\int_{-\infty}^{+\infty}f_{XY}(u+v,v)dv\]
+    \[f_{X*Y}(u)=\int_{-\infty}^{+\infty}\frac{1}{|v|}f_{XY}(v,\frac{u}{v})dv\]
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Chi-squared Distribution}
+    \textbf{Definition by normal distribution}: $Z_1, Z_2, \dots, Z_n$ are i.i.d standard normal distribution. The sum of square $X=Z_1^2+Z_2^2+\dots + Z_n^2$ is said to follow a \textbf{chi-squared($\chi^2$) distribution with n degrees of freedom}. Denoted as
+    \[X\sim \chi^2_{n} \text{ or } \chi^2(n)\]
+    \textbf{Additivity}: If $X_1\sim \chi^2_{n}, X_2\sim \chi^2_{m}$, then $(X_1+X_2)\sim \chi^2_{m+n}$\par
+    You will meet this distribution very frequently in statistic part of our course.
+    
+
+\end{frame}
+
+\section{Extra topic and Q\&A}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Expectation for all kinds of random variables}
+    We have defined the expectation of discrete and random variable. However, we don't put the definition together. Also, some distribution are neither discrete nor continuous, and we haven't defined such kind of random variable's expectation!\par
+    \textbf{Riemann-Stieltjes integral}: Suppose two real functions, $f$ and $g$, are defined on $[a,b]$. Suppose $a=x_0<x_1<\dots <x_{n-1}<x_n=b$, and $d:=\min|x_{i+1}-x_{i}|$. Denote $\Delta g_i=g(x_i)-g(x_{i-1})$. We take $\xi_{i}\in [x_i,x_{i+1}]$, if $I=\lim\limits_{d\to 0}\sum\limits_{i=1}^{n}f(\xi_{i})\Delta g_i$ exist and do not depend on how we choose $\xi_{i}$, we then say $I$ is the value of \textbf{Riemann-Stieltjes integral} of $f$ with respect to $g$ on $[a,b]$, denoted as
+    \[I=\int_{a}^{b}f(x)dg(x)\]
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Expectation for all kinds of random variables}
+    Relationship between Riemann-Stieltjes and Riemann integral:
+    \begin{itemize}
+        \item When $g(x)$ is differentiable, $\int_{a}^{b}f(x)g'(x)dx$
+    \end{itemize}\par
+    \vspace{0.3cm}
+    For a random variable $X$ with CDF $F_{X}(x)$ (note that every random variable has CDF), $E[X]:=\int_{-\infty}^{\infty}xdF(x)$
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Extra topic and Q\&A}
+    Now we have seen most of the probability distribution. Please summarize them in a table. Here's a wikipedia page, and you can print all these pages to pdf for you to refer in the exam. (However you may fail to have access to wikipedia today unluckily).\par
+    \vspace{0.3cm}
+    
+    
+\end{frame}
+
+\end{document} 
