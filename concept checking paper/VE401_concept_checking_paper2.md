@@ -10,21 +10,21 @@
 
 3. Which important concept is abbreviated as "i.i.d"? 
 
-4. If $$X\sim B(10,0.3)$$, then what's $$P[X=6]$$?
+4. If $X\sim B(10,0.3)$, then what's $P[X=6]$?
 
-5. If $$X_1\sim B(n_1,p), X_2\sim B(n_2,p)$$, what's the distribution of $$X_1+X_2$$ ？
+5. If $X_1\sim B(n_1,p), X_2\sim B(n_2,p)$, what's the distribution of $X_1+X_2$ ？
 
-6. What's the probability density function(PDF) of Geometric distribution with parameter $$p$$ ?
+6. What's the probability density function(PDF) of Geometric distribution with parameter $p$ ?
 
-7. Suppose $$X\sim Geom(p_1)$$, $$X_1, X_2,\dots , X_n$$ are $$n$$ i.i.d random sample of $$X$$, which kinds of distribution does the random variable $$\sum\limits_{i=i}^{n}X_i$$ follows? Hint: https://umji.sjtu.edu.cn/~horst/teaching/resources/ve401_summer17_ex02.pdf, ex 2.5
+7. Suppose $X\sim Geom(p_1)$, $X_1, X_2,\dots , X_n$ are $n$ i.i.d random sample of $X$, which kinds of distribution does the random variable $\sum\limits_{i=i}^{n}X_i$ follows? Hint: https://umji.sjtu.edu.cn/~horst/teaching/resources/ve401_summer17_ex02.pdf, ex 2.5
 
 8. Does every random variable have expectation.
 
-9. Suppose $$X$$ has PDF $$f_X(x)$$, and $$Y=\varphi(X)$$, what's $$E[Y]$$ (if exist)?
+9. Suppose $X$ has PDF $f_X(x)$, and $Y=\varphi(X)$, what's $E[Y]$ (if exist)?
 
-10. Express $$Var[X]$$ in terms of expectation.
+10. Express $Var[X]$ in terms of expectation.
 
-11. Express the m.g.f of $$X$$, $$m_X(t)$$, in terms of expectation.
+11. Express the m.g.f of $X$, $m_X(t)$, in terms of expectation.
 
 12. What's pascal distribution's PDF? 
 
@@ -32,7 +32,7 @@
 
 14. Explain how and when to approximate binomial distribution with Poisson distribution?
 
-15. $$X_1\sim \pi(\lambda_1),X_2\sim \pi(\lambda_2)$$, what's the distribution of $$X_1+X_2$$ ? (note: $$\pi(\lambda)$$ means Poisson distribution with parameter $$\lambda$$)
+15. $X_1\sim \pi(\lambda_1),X_2\sim \pi(\lambda_2)$, what's the distribution of $X_1+X_2$ ? (note: $\pi(\lambda)$ means Poisson distribution with parameter $\lambda$)
 
     
 

@@ -5,9 +5,9 @@
 **The concept checking paper 6 is related to interval estimate**
 
 1. What's a disadvantage of point estimate?
-2. If $$X\sim N(\mu, \sigma^2)$$, and $$X_1, X_2, \dots , X_n$$ are n i.i.d sample of $$X$$, the sample mean, $$\overline{X}$$ follows which distribution with what parameters?
-3. What's the definition of $$z_{\alpha}, \chi^2_{\alpha,n}, t_{\alpha,n}$$ ?
-4. When the overall variance is known(denoted as $$\sigma^2$$), what's the $$1-\alpha$$ two-side, upper, lower confidence interval of $$\mu$$?
-5. When the overall variance is unknown, what's the $$1-\alpha$$ two-side, upper, lower confidence interval of $$\mu$$?
-6. When the overall variance is unknown, what's the $$1-\alpha$$ two-side, upper, lower confidence interval of $$\sigma^2$$ ?
-7. Suppose we calculated that the 95% two-side confidence interval for $$\mu$$ is $$[10, 15]$$, does that mean $$P[\mu\in[10,15]]=0.95$$ ?
+2. If $X\sim N(\mu, \sigma^2)$, and $X_1, X_2, \dots , X_n$ are n i.i.d sample of $X$, the sample mean, $\overline{X}$ follows which distribution with what parameters?
+3. What's the definition of $z_{\alpha}, \chi^2_{\alpha,n}, t_{\alpha,n}$ ?
+4. When the overall variance is known(denoted as $\sigma^2$), what's the $1-\alpha$ two-side, upper, lower confidence interval of $\mu$?
+5. When the overall variance is unknown, what's the $1-\alpha$ two-side, upper, lower confidence interval of $\mu$?
+6. When the overall variance is unknown, what's the $1-\alpha$ two-side, upper, lower confidence interval of $\sigma^2$ ?
+7. Suppose we calculated that the 95% two-side confidence interval for $\mu$ is $[10, 15]$, does that mean $P[\mu\in[10,15]]=0.95$ ?

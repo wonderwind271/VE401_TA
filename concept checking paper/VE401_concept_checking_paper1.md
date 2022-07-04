@@ -10,16 +10,16 @@
 1. I throw three coins. Suppose "H" means head and "T" means tail in one throw. 
 
    1. What's the sample space of this experiment?
-   2. Define event $$A$$: "The last throw is different from the first throw". Write out the event in terms of set.
+   2. Define event $A$: "The last throw is different from the first throw". Write out the event in terms of set.
 
 2. What's the mathematical definition of "probability"?
 
 3. True or false? 
 
    1. Any subset of a sample space S is an event.
-   2. It's possible to randomly, equally possibly pick a number from the set of $$N$$
-   3. It's possible to randomly, equally possibly pick a number from the set of $$R$$
-   4. It's possible to randomly, equally possibly pick a number from the set of $$[0,1]$$
+   2. It's possible to randomly, equally possibly pick a number from the set of $N$
+   3. It's possible to randomly, equally possibly pick a number from the set of $R$
+   4. It's possible to randomly, equally possibly pick a number from the set of $[0,1]$
 
 4. Give an example to show that an "almost surely occurred" event may not always happen
 
