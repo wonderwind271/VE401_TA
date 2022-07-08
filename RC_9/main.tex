@@ -1,0 +1,260 @@
+\documentclass{beamer} 
+\usepackage{amsmath,amsthm}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{soul}
+\usepackage{listings}
+\usepackage{bm}
+
+% \usepackage{minted}
+
+
+\usetheme{WVU}
+\usecolortheme{WVU}
+\usepackage{multirow}
+
+\mode<presentation> 
+
+\title[VE401 SU2022 RC week9]{VE401 SU2022 RC week9}
+
+\author[ Shuyu Wu ]{ Shuyu Wu }
+\institute[UM-SJTU JI]{UM-SJTU Joint Institute \vspace{.2cm} \\ \includegraphics[scale=0.3]{umji_logo.png}\\wushuyu2002@sjtu.edu.cn}
+\date[July 2022]{\today}
+
+\begin{document}
+\begin{frame} 
+
+\titlepage 
+
+\end{frame} 
+\section{About Project}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Some Crucial things related to Project}
+    ``Coursework involving collaboration within a group (e.g., lab reports, project reports, etc.) require that all members of the group whose name appears on the assignment are jointly and fully responsible for the entirety of the submitted work. If any section of the submission is found to violate the Honor Code, \textbf{all group members whose name appears on the submission are equally and jointly liable for the violation}. An exception is possible, at the instructor’s discretion, if part of the work is clearly delineated as originating only from specific group members.''\par
+    \vspace{0.3cm}
+    \hfill ---JI Honor Code, Chapter 5
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Professor's Attitute towards project}
+
+    ``Indeed, students should trust each
+    other, but they should not be blind. If bad practices lead to a complete
+    ignorance about what the other students are doing, then that is
+    negligence, not trust.''
+
+\end{frame}
+
+\section{Comparison of Two Variances} 
+\begin{frame}
+       \frametitle{Outline}
+       \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Comparing Two Variances}
+    Given two set of sample, from $X^{(1)}\sim N(\mu_1,\sigma_{1}^2)$ and $X^{(2)}\sim N(\mu_2,\sigma_{2}^2)$ respectively, how to determine if their variance are equal?\par
+    test statistic: 
+    \[F_{n_1-1, n_2-1}=\frac{\sigma_2^2 S_1^2}{\sigma_1^2 S_2^2}\]
+    If $H_0: \sigma_{1}^2=\sigma_{2}^2$ is true, $\frac{S_1^2}{S_2^2}$ follows F-distribution with $n_1-1$ and $n_2-1$ degrees of freedom. 
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{F-distribution}
+
+    Again, you don't need to remember the tedious PDF of F distribution. However, you need to know some properties.
+    \begin{itemize}
+        \item $F_{\gamma_1, \gamma_2}:=\frac{\chi^2_{\gamma_1}/\gamma_1}{\chi^2_{\gamma_2}/\gamma_2}$
+        \item $P[F_{\gamma_1, \gamma_2}<x]=1-P[F_{\gamma_2, \gamma_1}<\frac{1}{x}]$
+        \item $f_{1-\alpha, \gamma_1, \gamma_2}=\frac{1}{f_{\alpha, \gamma_2, \gamma_1}}$
+        \item python code to get $f_{p, \gamma_1, \gamma_2}$: $\text{scipy.stats.f.isf}(p, \gamma_1, \gamma_2)$
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{F-test}
+
+    Our test statistic is $F_{n_1-1, n_2-1}=\frac{S_1^2}{S_2^2}$, so the critical region at significance level of $\alpha$ is:
+    \begin{itemize}
+        \item $H_0: \sigma_1\leq \sigma_2$ if $\frac{S_1^2}{S_2^2}> f_{\alpha, n_1-1, n_2-1}$
+        \item $H_0: \sigma_1\geq \sigma_2$ if $\frac{S_2^2}{S_1^2}> f_{\alpha, n_2-1, n_1-1}$
+        \item $H_0: \sigma_1 = \sigma_2$ if $\frac{S_2^2}{S_1^2}> f_{\alpha/2, n_2-1, n_1-1}$ or $\frac{S_1^2}{S_2^2}> f_{\alpha/2, n_1-1, n_2-1}$
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Power of the F-test}
+
+    Check the OC-curve. $\lambda=\frac{\sigma_1}{\sigma_2}$. We deal with cases such that $n=n_1=n_2$.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ex 9.1}
+
+    Read through Horst's slide page 501-503. What's wrong with the example? Will the final result of sample size greater or smaller than 20?
+
+\end{frame}
+
+\section{Comparison of Two Means}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Comparing Two Means}
+
+    Given two set of sample, from $X^{(1)}\sim N(\mu_1,\sigma_{1}^2)$ and $X^{(2)}\sim N(\mu_2,\sigma_{2}^2)$ respectively, how to determine if their mean are equal?\par
+
+    Three situations:
+    \begin{itemize}
+        \item $\sigma_1$ and $\sigma_2$ already known.
+        \item $\sigma_1$ and $\sigma_2$  unknown but equal.
+        \item $\sigma_1$ and $\sigma_2$  unknown and not necessarily equal
+    \end{itemize}
+    Clearly, 
+    \[\frac{\overline{X}^{(1)}-\overline{X}^{(2)}-(\mu_1-\mu_2)}{\sqrt{\sigma_1^2/n_1+\sigma_2^2/n_2}}\sim N(0,1)\]
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Variance already known}
+    Suppose We already know $\sigma_1^2$ and $\sigma_2^2$, then the test statistic is simply $Z=\frac{\overline{X}^{(1)}-\overline{X}^{(2)}}{\sqrt{\sigma_1^2/n_1+\sigma_2^2/n_2}}$. And the critical region is the same for z-test. That is, 
+    \begin{itemize}
+        \item $|Z|>z_{\alpha/2}$ for $H_0: \mu_1=\mu_2$
+        \item $Z>z_{\alpha}$ for $H_0: \mu_1\leq \mu_2$
+        \item $Z<z_{\alpha}$ for $H_0: \mu_1\geq \mu_2$
+    \end{itemize}
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Power for the Test}
+
+    This is called a pooled test. $d=\frac{|\mu_1-\mu_2|}{\sqrt{\sigma_1^2+\sigma_2^2}}$, $n=\frac{\sigma_1^2+\sigma_2^2}{\sigma_1^2/n_1+\sigma_2^2/n_2}$ and plug these number into the OC-curve for z-test. 
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Variance Unknown but Equal}
+
+    In this case 
+    \[\frac{\overline{X}^{(1)}-\overline{X}^{(2)}-(\mu_1-\mu_2)}{\sqrt{\sigma^2(\frac{1}{n_1}+\frac{1}{n_2})}}\]
+    follows a standard normal distribution. Now we use $S_p^2$ to approximate $\sigma^2$. $S_p^2$ is called pooled estimator for the variance.\par
+    \[S_p^2 :=\frac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}\]
+    And the test statistic is 
+    \[T_{n_1+n_2-2}=\frac{\overline{X}^{(1)}-\overline{X}^{(2)}-(\mu_1-\mu_2)}{\sqrt{S_{p}^2(\frac{1}{n_1}+\frac{1}{n_2})}}\]
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Variance Unknown but Equal}
+    The critical region is just T-test then. Or you calculate the confidence interval of $\mu_1-\mu_2$ for T distribution and the critical region is just the complementary set.
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Power for the Test}
+
+    $d=\frac{|\mu_1-\mu_2|}{2\sigma}$, $n^{*}=2n-1$ (equal size). $n$ is the actual sample size, and $n^{*}$ is the modified sample size which will be put into OC curve for T-test.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Populations with Unequal Variances}
+
+    You shouldn't perform variance test first and then use the above way to determine whether the mean are equal when you don't know exactly whether the variance are the same. Instead, you should suppose they're not same.\par
+
+    For $H_0: \overline{X}^{(1)}-\overline{X}^{(2)}=(\mu_1 - \mu_2)_0$, 
+    \[\frac{\overline{X}^{(1)}-\overline{X}^{(2)}-(\mu_1-\mu_2)_0}{\sqrt{S_1^2/n_1+S_2^2/n_2}}\]
+    follows a T-distribution with freedom $\gamma$. Here
+    \[\gamma=\frac{(S_1^2/n_1+S_2^2/n_2)^2}{\frac{(S_1^2/n_1)^2}{n_1-1}+\frac{(S_2^2/n_2)^2}{n_2-1}}\]
+    This is called Welch's (pooled) test for equality of means.
+
+\end{frame}
+
+\section{Non-Parametric Comparisons; Paired Tests and Correlation}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Wilcoxon Rank-Sum Test}
+
+    I don't want to say a lot \dots You'll definitely not have enough time if this occur in the final exam and you perform the test by hand. \par
+    This is the Non-Parametric way of judging if the median of two samples are equal(or which one is bigger). \par
+    What you need to remember is a matlab function \`{}ranksum\`{}, which is a two-tailed test, and return the p-value. If you want a one-tailed test, multiply by 2.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Paired Test}
+
+    We have two normal populations $X$ and $Y$, each with n i.i.d samples. So $D:=X-Y$ follows a normal distribution, and we have n samples $X_1-Y_1, X_2-Y_2, \dots, X_n-Y_n$. Set the sample variance to be $S_{D}^2$. The test statistic is 
+    \[T_{n-1}=\frac{\overline{D}-\mu_{D}}{\sqrt{S_{D}^2/n}}\]
+    Which actually change the problem of comparing two means into a simple T-test. This kind of test is called paired T-test.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Non-Parametric Paired Test}
+
+    Perform sign rank test on $X-Y$. Remember symmetric requirement.\par
+    Use matlab function \`{}signrank(X,Y)\`{}'
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Comparation of pooled and paired T-test}
+    When $\rho_{X,Y}>0$, paired test may be better. Otherwise use pooled test because its degrees of freedom is larger.
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Estimation Correlation}
+
+    Given two sample with equal size, set $R$ to be their correlation coefficient, then $R=\hat{\rho}$, and a $(1-\alpha)$ confidence interval for $\rho$ is
+    \[\tanh(\text{Arctanh}(R)\pm \frac{z_{\alpha/2}}{\sqrt{n-3}})\]
+    The critical region is just the complementary set.
+
+\end{frame}
+
+\section{Extra topic and Q\&A}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+
+
+\begin{frame}
+    \frametitle{Q\&A}
+    
+    Feel free to ask if you have any questions.\par
+    
+    
+    
+\end{frame}
+
+\end{document} 
