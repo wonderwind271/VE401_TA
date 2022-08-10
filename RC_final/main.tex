@@ -1,0 +1,422 @@
+\documentclass{beamer} 
+\usepackage{amsmath,amsthm}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{soul}
+\usepackage{listings}
+\usepackage{bm}
+\usepackage{braket}
+
+% \usepackage{minted}
+
+
+\usetheme{WVU}
+\usecolortheme{WVU}
+\usepackage{multirow}
+
+\mode<presentation> 
+
+\title[VE401 SU2022 final RC(part 2)]{VE401 SU2022 final RC(part 2)}
+
+\author[ Shuyu Wu ]{ Shuyu Wu }
+\institute[UM-SJTU JI]{UM-SJTU Joint Institute \vspace{.2cm} \\ \includegraphics[scale=0.3]{umji_logo.png}\\wushuyu2002@sjtu.edu.cn}
+\date[July 2022]{\today}
+
+\begin{document}
+\begin{frame} 
+
+\titlepage 
+
+\end{frame} 
+\section{Non-Parametric Test and Paired Test}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Non-Parametric Test}
+    We use non-parametric test when:
+    \begin{itemize}
+        \item We don't know where the sample come from. For example, we don't know if they come from normal distribution
+        \item We're not sure if the sample are independent to each other
+    \end{itemize}
+    There're 3 (or 4) types of non-parametric test:
+    \begin{itemize}
+        \item sign test
+        \item Wilcoxon Signed Rank Test
+        \item Wilcoxon Rank Sum Test
+        \item non-parametric paired test (Wilcoxon Signed Rank Test)
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sign Test for Median}
+
+    The null hypothesis is of these kinds: 
+    \begin{itemize}
+        \item $H_0: M=M_0$
+        \item $H_0: M\leq M_0$
+        \item $H_0: M\geq M_0$
+    \end{itemize}
+    $M$ is the median. Now given a sample $X_1, X_2,\dots , X_n$, we want to figure out whether $H_0$ should be rejected.\par
+    Set $Q_{+}$ be the number of the sample that is greater than $M$, $Q_{-}$ be the number of the sample that is smaller than $M$. We have 
+    \[P[Q_{-}\leq k]=P[Q_{+}\leq k]=\frac{1}{2^n}\sum\limits_{x=0}^{k} \binom{n}{x}\]
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{P-value}
+
+    For null hypothesis
+    \begin{itemize}
+        \item $H_0: M\leq M_0$ The P value is $P[Q_{-}\leq k|M=M_0]$
+        \item $H_0: M\geq M_0$ The P value is $P[Q_{+}\leq k|M=M_0]$
+        \item $H_0: M= M_0$ The P value is $2*P[min\{Q_{+},Q_{-}\}\leq k|M=M_0]$
+    \end{itemize}
+    k is the corresponding count in the sample.\par
+    When the P-value is below the significance level $\alpha$, $H_0$ is rejected.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Wilcoxon Signed Rank Test}
+
+    If the sample is approximately symmetric, the Wilcoxon sign rank test is more accurate.\par
+
+    The $H_0$ is basically the same. If it's a two-tailed test, the matlab function\par
+    signrank(A)\par
+    will compare the sample A with 0 and return the p-value for $H_0: M=0$. To test $H_0: M=M_0$, you can have\par
+    signrank($A-M_0$)\par
+    You need to divide it by 2 if it's a one-tailed test.\par
+
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Wilcoxon Rank Sum Test}
+
+    Compare if two distributions have the same median, or one of them are larger.\par
+    If you want to do a two-tailed test for sample A and B, use\par
+    ranksum(A,B)\par
+    You need to divide it by 2 if it's a one-tailed test.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Paired test}
+
+    To compare the mean of $A$ and $B$, we can perform some test on $A-B$.\par
+    If we perform a Wilcoxon sign rank (not rank sum) test, this is called non-parametric paired test.\par
+    matlab: signrank(A,B). Again, if it's one-tailed test, divide it by 2.\par
+    You can also perform T-test directly. 
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{When do We Use Paired Test}
+
+    When $A$ and $B$ are positively correlated. Otherwise a pool test is better because it gives more degrees of freedom.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Correlation}
+
+    The estimator of correlation:
+    \[R:=\hat{\rho}=\frac{\sum(X_i-\overline{X})(Y_i-\overline{Y})}{\sqrt{\sum(X_i-\overline{X})^2}\sqrt{\sum(Y_i-\overline{Y})^2}}\]
+
+    The confidence interval is 
+    \[\tanh(\tanh^{-1}(R)\pm \frac{z_{\alpha/2}}{\sqrt{n-3}})\]
+    The critical region is just the complement set.\par
+    Or, use the test statistic
+    \[Z=\sqrt{n-3}(\tanh^{-1}(R)-\tanh^{-1}(\rho_0))\]
+
+\end{frame}
+
+\section{Categorical Data}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Chi-squared Goodness-of-fit Test}
+
+    \textbf{The Pearson Statistic}: Let $O_i$ be the observed value and $E_i$ be the expected value. Pearson statistic is 
+    \[\sum\limits_{i=1}^{k}\frac{(O_i-E_i)^2}{E_i}\]
+    $O_i$ must be original value.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Goodness-of-Fit Test for a Discrete Distribution}
+    Let $m$ be the number of parameters to be estimated. \par
+    The Pearson statistic follows a chi-squared distribution with $\chi^2_{k-1-m}$ degrees of freedom.\par
+    For continuous distribution you need to split them into bins.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Test of Independence}
+
+    If two groups of data are independent, their joint distribution is the product of marginal density. So, we can calculate out the marginal density by summing one row/column up and divide by total sample size.\par
+    Suppose two categories are independent, then the joint density should be their product, and we can calculate the ``expected value''. Finally we can perform the chi-squared test. The degree of freedom is $(r-1)(c-1)$.
+
+\end{frame}
+
+\section{Simple Linear Regression}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+\begin{frame}
+    \frametitle{Estimate of Parameters}
+
+    Encouraged tool: matlab (with curve fitting toolbox)\par
+    Set 
+    \[\overline{x}=\frac{1}{n} \sum\limits_{i=1}^{n} x_i, \overline{y}=\frac{1}{n} \sum\limits_{i=1}^{n} y_i\]
+    \[S_{xx}=\sum\limits_{i=1}^{n}(x_i-\overline{x})^2, S_{yy}=\sum\limits_{i=1}^{n}(y_i-\overline{y})^2, S_{xy}=\sum\limits_{i=1}^{n}(x_i-\overline{x})(y_i-\overline{y})\]
+    And we have 
+    \[b_1=\frac{S_{xy}}{S_{xx}}, b_0=\overline{y}-b_1 \overline{x}, SS_E=S_{yy}-b_1 S_{xy}\]
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Least Squares Estimator for the Variance}
+
+    \[S^2=\frac{SS_E}{n-2}\]
+    The confidence interval for $\beta_0$ and $\beta_1$ are:
+    \[\beta_1: b_1\pm t_{\alpha/2, n-2} \frac{S}{\sqrt{S_{xx}}}\]
+    \[\beta_0: b_0\pm t_{\alpha/2, n-2} \frac{S \sqrt{\sum x_i^2}}{\sqrt{n S_{xx}}}\]
+    We say that a regression is significant if there is statistical evidence that
+    the slope $\beta_1\neq 0$, that is to say, the confidence interval of $\beta_1$ doesn't contain 0.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Confidence Interval and Prediction Interval}
+
+    Confidence Interval the Estimated Mean $\mu_{Y|x}$: 
+    \[\hat{\mu}_{Y|x}\pm t_{\alpha/2, n-2}S\sqrt{\frac{1}{n}+\frac{(x-\overline{x})}{S_{xx}}}\]
+    Please notice that $\mu_{Y|x}$ is a parameter, not a random variable.\par
+    Now we want to know what we will get for $Y|x$ next time we get X=x, which is a random variable. That is to say, we want the prediction of the random variable.\par
+    The $100(1-\alpha)\%$ prediction interval for $Y|x$ is given by
+    \[\widehat{Y|x}\pm t_{\alpha/2, n-2}S\sqrt{1+\frac{1}{n}+\frac{(x-\overline{x})}{S_{xx}}}\]
+    The $\widehat{Y|x}=\hat{\mu}_{Y|x}=b_0+b_1 x$
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Coefficient of Determination}
+
+    $SS_{T}:=S_{yy}$ is the Total Sum of Squares. $SS_{E}:=\sum\limits_{i=1}^{n} e_i^2=\sum\limits_{i=1}^{n} (y_i-(b_0+b_1 x))^2$ represents the variation of Y that remains after we have applied the
+    model.\par
+    \[R^2:=1-\frac{SS_{E}}{SS_{T}}\]
+    Also we have 
+    \[R^2=\frac{S_{xy}^2}{S_{xx}S_{yy}}\]
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{T and F-test for significance of regression}
+    We can rewrite the significance of regression:
+    \[T_{n-2}=\frac{R}{\sqrt{1-R^2}}\sqrt{n-2}\]
+    Reject at $|T_{n-2}|>t_{\alpha/2,n-2}$\par
+    Or we can use F-test (which can be generalized to multiple linear regression).\par
+    \[F_{1,n-2}=(n-2)\frac{R^2}{1-R^2}=(n-2)\frac{SS_{T}-SS_{E}}{SS_{E}}\]
+    Reject $H_0: \beta_1=0$ at significance level $\alpha$ when $F_{1,n-2}>f_{\alpha,1, n-2}$. Note that this is a one-tailed test.\par
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Lack-of-Fit and Pure Error}
+
+    \[F_{k-2,n-k}=\frac{SS_{E;lf}/(k-2)}{SS_{E;pe}/(n-k)}\]
+    And reject $H_0: \text{the model is proper}$ at significance level $\alpha$ when $F_{k-2,n-k}>f_{\alpha,k-2,n-k}$.\par
+    Sum up all the internal sum of square, we get the error sum of squares due to pure error, $SS_{E;pe}$.\par
+    \[SS_{E;pe}:=\sum\limits_{i=1}^{k}\sum\limits_{j=1}^{n_i}(Y_{ij}-\overline{Y_i})^2\]
+    And $\frac{SS_{E;pe}}{\sigma^2}$ follows $\chi^2_{n-k}$. Also $SS_{E;lf}$ (the error sum of squares due to lack of fit) is defined as
+    \[SS_{E;lf}:=SS_E-SS_{E;pe}\]
+
+\end{frame}
+
+\section{Multiple Linear Regression}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+\begin{frame}
+    \frametitle{Model Specification Matrix}
+    There's basically no difference between different multiple linear models.\par
+    For the model $Y_i=\beta_0+\beta_1 x_i+\dots +\beta_p x_i^p + E_i$, $i=1,2,\dots , n$, we can use a matrix equation to represent
+    \[\mathbf{Y}=X\boldsymbol{\beta}+\mathbf{E}\]
+    And 
+    \begin{equation*}      
+        \mathbf{Y}=
+        \left( 
+          \begin{array}{ccc}  
+        
+            Y_1\\
+            \vdots\\
+            Y_n
+          \end{array}
+        \right)   
+        , X=
+        \left(
+        \begin{array}{ccccc}
+            1 & x_1 & x_1^2 & \cdots & x_1^p\\
+            \vdots & \vdots & \vdots & \ddots & \vdots\\
+            1 & x_n & x_n^2 & \cdots & x_n^p
+        \end{array}
+        \right)
+        , \mathbf{E}=
+        \left(
+            \begin{array}{ccc}  
+        
+                E_1\\
+                \vdots\\
+                E_n
+              \end{array}
+        \right)
+    \end{equation*}
+    The $X$ is called the model specification matrix. Each row is one sample, and each column corresponds to one term in the model.\par
+    Make sure you also know how to calculate other model's specification matrix.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{The Regression Coefficients}
+
+    Now we want to calculate $\mathbf{b}$ which is the estimator of $\boldsymbol{\beta}$. Our result is
+    \[\mathbf{b}=(X^{T}X)^{-1}X^{T}\mathbf{Y}\]
+    Please notice that this applies to any linear regressions, not only for polynomial model.\par
+    Of course, you'd better do the calculation with matlab or other softwares.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Error Analysis, $R^2$}
+
+    The P projection is an $n*n$ matrix with value $\frac{1}{n}$ for each of the element. The hat matrix $H:=X(X^{T}X)^{-1}X^{T}$. Our result for $SS_{T}$ and $SS_{E}$ are:
+    \[SS_{E}=\Braket{Y, (\mathbb{I}_{n}-H)Y}, \]
+    \[SS_{T}=\Braket{Y,(\mathbb{I}_{n}-P)Y}=SS_{E}+SS_{R}\]
+    \[R^2=1-\frac{SS_{E}}{SS_{T}}\]
+    \textbf{Notice:} You shouldn't use mathematica to calculate $R^2$ in function "NonLinearModelFit". Mathematica will use corrected $R^2$ which is not taught in our course. However, matlab will give correct answer.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Distribution of the Sum of Squares Error}
+
+    \[\frac{SS_E}{\sigma^2}\sim \chi^2_{n-p-1}\]
+    $p$ is the number of variables in the regression model($x$ and $x^2$ term is counted as 2). $p+1$ is the number of terms. For example, for simple linear regression $p=1$ $(p+1=2)$, the model specification matrix has n rows and $(p+1)$ columns.\par
+    Also, the estimator 
+    \[S^2=\frac{SS_E}{n-p-1}\]
+    is unbiased for $\sigma^2$
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{F-Test for Significance of Regression}
+    The null hypothesis is $H_0: \beta_1=\beta_2=\dots  =\beta_p=0$\par
+    The test statistic for the F-test is 
+    \[F_{p,n-p-1}=\frac{SS_R/p}{S^2}=\frac{n-p-1}{p}\frac{R^2}{1-R^2}\]
+    So you can easily determine the F statistic using only matlab. And it's a one-tailed test of course, so we reject $H_0$ at $F_{p,n-p-1}>f_{\alpha, p,n-p-1}$.\par
+
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Analysis of the Parameters}
+
+    $Var[\textbf{b}]=\sigma^2(X^{T}X)^{-1}$. Denote $\xi_{ii}=((X^{T}X)^{-1})_{ii}$, we have 
+    \[Var[B_i]=\xi_{ii}\sigma^2\]
+    In practice, we use $S^2$ to estimate $\sigma^2$, so it'll be a T-test. The confidence interval for the parameter $\beta_j$ is
+    \[b_j\pm t_{\alpha/2, n-p-1}S\sqrt{\xi_{jj}}\]
+    for $j=0$ to $p$.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Confidence Intervals for the Estimated Mean}
+
+    Short review question: What's the difference between confidence interval and prediction interval?\par
+    \vspace{0.3cm}
+
+    A $100(1-\alpha)\%$ confidence interval for $\mu_{Y|x_0}$ is 
+    \[\mu_{Y|x_0}=\hat{\mu}_{Y|x_0}\pm t_{\alpha/2, n-p-1} S \sqrt{\mathbf{x_0}^{T}(X^{T}X)^{-1}\mathbf{x_0}}\]
+    Here, the $\mathbf{x_0}\in \mathbb{R}^{p+1}$\par
+
+    A $100(1-\alpha)\%$ prediction interval for $Y|x_0$ is 
+    \[Y|x_0=\widehat{Y|x_0}\pm t_{\alpha/2, n-p-1} S \sqrt{1+\mathbf{x_0}^{T}(X^{T}X)^{-1}\mathbf{x_0}}\]
+    Note that $\hat{\mu}_{Y|x_0}=\widehat{Y|x_0}$ is just $X\mathbf{b}$
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Partial F-Test for Model Sufficiency}
+
+    Some times a reduced model is good enough compared with full model. That is to say, $SS_{E,reduced}$ is not much bigger than $SS_{E, full}$.\par
+    We set $H_0: \text{the reduced model is sufficient}$. We reject $H_0$ if there's evidence that $SS_{E,full}\ll SS_{E,reduced}$.\par
+    \vspace{0.3cm}
+    Now suppose that we have a full model of $p+1$ predictor variables, and a reduced model with $m+1$ ($m<p$) predictor variables.\par
+    \vspace{0.3cm}
+    The test statistic is $F_{p-m,n-p-1}=\frac{n-p-1}{p-m}\frac{SS_{E,reduced}-SS_{E,full}}{SS_{E,full}}$. Again this must be a one-tailed test, so we reject $H_0$ at significance level $\alpha$ if $F_{p-m,n-p-1}>f_{\alpha,p-m,n-p-1}$.\par
+    \vspace{0.3cm}
+    Partial F-test is actually the generalization of both T-test(for the significance of a single parameter) and F-test (for the significance of the whole model).
+
+\end{frame}
+
+\section{Q\&A}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+\begin{frame}
+    \frametitle{Some Exercise in Sample Exam and Last Year's Final}
+
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Python And Matlab Cheatsheet}
+
+    Uploaded on canvas
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Farewell}
+
+    There is one in a billion course you take in JI, I hope this is the one that help you understand and transform the world. Also, one in a trillion TA you meet in JI, we hope we're the TA that actually help you.\par
+    \vspace{0.3cm}
+    ``I love math, love this job, and love you all!"\footnote{Chengsong Zhang. VV285 SU2021 Final RC}\par
+    
+    
+
+\end{frame}
+\begin{frame}
+    \frametitle{Q\&A}
+    Good luck to all of you for your ﬁnal. Maybe see you in EECS 501(probability and random process) next winter semester.\par
+    \vspace{0.3cm}
+    Also, hope you all enjoy this course (though it is okay if you don't)\par
+    Feel free to ask if you have any questions.\par
+    
+    
+    
+\end{frame}
+
+\end{document} 
