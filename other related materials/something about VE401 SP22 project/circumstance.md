@@ -62,19 +62,19 @@ Many of my students in VE401 this summer know more or less about the plagiarism 
 
 1. Q: Why the hearing is in July while the case happened in April?
 
-​		A: That's because in honor council, the investigation process starts when the chair of honor council starts the process. Before that, even other members of the honor council don't know these cases.
+	A: That's because in honor council, the investigation process starts when the chair of honor council starts the process. Before that, even other members of the honor council don't know these cases.
 
 2. Q: I've heard that Horst was still censoring plagiarism cases in July. Is that the case?
 
-​		A: No.
+	A: No.
 
-3. Q: Does Horst know that he reports you to the honor council when he chose you to be the TA in VE401 SU22?
+3. Q: Did Horst knew that he has reported you to the honor council when he chose you to be the TA in VE401 SU22?
 
-​		A: Yes. But he didn't tell me at that time. At that time very few people apply for VE401 TA, so maybe he had no choice.
+   A: Yes. But he didn't tell me at that time. At that time very few people apply for VE401 TA, so maybe he had no choice.
 
-4.  Q: I'm a student in VE401 SU22. Is my group found plagiarizing?
+4. Q: I'm a student in VE401 SU22. Is my group found plagiarizing?
 
-​		A: Sorry, I don't know either. The reason is similar to question 1. Of course, it's also likely that no groups are reported to honor council.
+	A: Sorry, I don't know either. The reason is similar to question 1. Of course, it's also likely that no groups are reported to honor council.
 
 5. Q: I'll take VE401 after SU22, how to prevent plagiarism of projects due to my group members?
 
